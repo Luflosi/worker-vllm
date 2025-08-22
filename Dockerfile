@@ -16,7 +16,7 @@ RUN python3 -m pip install vllm==0.10.1.1 && \
     python3 -m pip install flashinfer -i https://flashinfer.ai/whl/cu121/torch2.3
 
 # Setup for Option 2: Building the Image with the Model included
-ARG MODEL_NAME=""
+ARG MODEL_NAME="codellama/CodeLlama-7b-hf"
 ARG TOKENIZER_NAME=""
 ARG BASE_PATH="/runpod-volume"
 ARG QUANTIZATION=""
@@ -24,6 +24,7 @@ ARG MODEL_REVISION=""
 ARG TOKENIZER_REVISION=""
 
 ENV MODEL_NAME=$MODEL_NAME \
+    OPENAI_SERVED_MODEL_NAME_OVERRIDE=$MODEL_NAME \
     MODEL_REVISION=$MODEL_REVISION \
     TOKENIZER_NAME=$TOKENIZER_NAME \
     TOKENIZER_REVISION=$TOKENIZER_REVISION \
