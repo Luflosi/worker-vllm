@@ -13,7 +13,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 # Install vLLM (switching back to pip installs since issues that required building fork are fixed and space optimization is not as important since caching) and FlashInfer 
 RUN python3 -m pip install vllm==0.10.1.1 && \
-    python3 -m pip install flashinfer -i https://flashinfer.ai/whl/cu121/torch2.3
+    python3 -m pip install flashinfer-python
 
 # Setup for Option 2: Building the Image with the Model included
 ARG MODEL_NAME="codellama/CodeLlama-7b-hf"
@@ -24,6 +24,7 @@ ARG MODEL_REVISION=""
 ARG TOKENIZER_REVISION=""
 
 ENV MODEL_NAME=$MODEL_NAME \
+    SERVED_MODEL_NAME=$MODEL_NAME \
     OPENAI_SERVED_MODEL_NAME_OVERRIDE=$MODEL_NAME \
     MODEL_REVISION=$MODEL_REVISION \
     TOKENIZER_NAME=$TOKENIZER_NAME \
